@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- namesapce:理解成实现类的全路径（包名.类名） -->
+ <mapper namespace="com.example.demo.dao.UserDao">
+	 <!-- id:方法名  parameterType:定义参数类型  resultType:返回值类型-->
+	 <select id="login" resultType="com.example.demo.entity.User">
+		SELECT * FROM user WHERE u_name=#{uName} and password=#{password}
+	</select>
+	
+	<select id="findByUsername" resultType="com.example.demo.entity.User">
+		SELECT * FROM user WHERE u_name=#{uName}
+	</select>
+	<select id="ListUserAndAuthor" resultMap="UserAndAuthor">
+		SELECT user.u_id,user.u_name,user.password,user.author_id,
+			 authority.author_type
+		 FROM user,authority
+		 WHERE user.author_id = authority.author_id
+	</select>
+	<resultMap id="UserAndAuthor" type="com.example.demo.entity.UserAndAuthor">
+		<id property="authorId" column="author_id"></id>
+		<result property="authorType" column="author_type"></result>
+		 <collection property="users" ofType="com.example.demo.entity.User">
+			<id property="uId" column="u_id"></id>
+			<result property="uName" column="u_name"></result>
+			<result property="password" column="password"></result>
+			<result property="authorId" column="author_id"></result>
+		</collection> 
+	</resultMap>
+ 	<select id="ListUserById" resultType="com.example.demo.entity.User">
+ 		SELECT * From user WHERE u_id=#{uId}
+ 	</select>
+ 	<insert id="addUser" useGeneratedKeys="true" keyProperty="uId"
+		keyColumn="u_id" parameterType="com.example.demo.entity.User">
+		INSERT INTO
+		user(u_name,password,
+		author_id)
+		VALUES
+		(#{uName},#{password},
+		#{authorId})
+	</insert>
+ 	<update id="updateUser" parameterType="com.example.demo.entity.User">
+ 		update user
+ 		<set>
+ 			<if test="uName!=null">u_name=#{uName}</if>
+ 			<if test="password!=null">password=#{password}</if>
+ 			<if test="authorId!=null">author_id=#{authorId}</if>
+ 			
+ 		</set>
+ 		where u_id=#{uId}
+ 	</update>
+ 	<delete id="deleteUser">
+ 		DELETE FROM user WHERE u_id=#{uId}
+ 	</delete>
+ 	
+ </mapper>
