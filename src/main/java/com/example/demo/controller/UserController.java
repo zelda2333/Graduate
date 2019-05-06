@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,8 +37,8 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/usermanage", method = RequestMethod.GET)
-	private Map<String, Object> listUser() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
+	private Model listUser(Model model) {
+		//Map<String, Object> modelMap = new HashMap<String, Object>();
 		//List<User> list = new ArrayList<User>();
 		//list = userService.ListUser();
 		// 获取已注册的用户列表
@@ -45,15 +46,18 @@ public class UserController {
 		List<UserAndAuthor> list = userDao.ListUserAndAuthor();
 		
 		for(UserAndAuthor authinfo:list){
-			modelMap.put("authorsinfo",authinfo);
-			//System.out.println(authinfo);	
-			for(User userinfo:authinfo.getUsers()){
-				modelMap.put("usersinfo",userinfo);
-			//	System.out.println(userinfo);	
+			model.addAttribute("authorsinfo",authinfo);
+			System.out.println(authinfo);
+			List<User> users = authinfo.getUsers();
+			model.addAttribute("usersinfo",users);
+			
+			for(User userinfo:users){
+//				model.addAttribute("usersinfo",userinfo);
+				System.out.println(userinfo);	
 			}
 		}
 		
-		return modelMap;
+		return model;
 	}
 /*	@RequestMapping("/login")
     public String login(){

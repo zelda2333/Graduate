@@ -10,10 +10,10 @@ public class JumpController {
     public String toScoresPage(){
         return "scores";
     }
-    @GetMapping(value = "/stuinfo")
+   /* @GetMapping(value = "/stuinfo")
     public String toInfosPage(){
         return "stuinfo";
-    }
+    }*/
   /*//用户管理页面
     @GetMapping(value = "/usermanage")
     public String toUserManagePage(){

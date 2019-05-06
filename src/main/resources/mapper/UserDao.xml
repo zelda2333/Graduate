@@ -16,7 +16,7 @@
 		SELECT user.u_id,user.u_name,user.password,user.author_id,
 			 authority.author_type
 		 FROM user,authority
-		 WHERE user.author_id = authority.author_id
+		 WHERE user.author_id = authority.author_id AND user.author_id=2
 	</select>
 	<resultMap id="UserAndAuthor" type="com.example.demo.entity.UserAndAuthor">
 		<id property="authorId" column="author_id"></id>
@@ -33,7 +33,7 @@
  	</select>
  	<insert id="addUser" useGeneratedKeys="true" keyProperty="uId"
 		keyColumn="u_id" parameterType="com.example.demo.entity.User">
-		INSERT INTO
+		INSERT IGNORE INTO
 		user(u_name,password,
 		author_id)
 		VALUES

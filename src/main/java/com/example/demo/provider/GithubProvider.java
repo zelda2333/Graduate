@@ -76,7 +76,7 @@ public class GithubProvider {
 				  Response response = client.newCall(request).execute();
 				  String string = response.body().string();
 				  List<GithubRepos> githubRepos = JSON.parseArray(string, GithubRepos.class);
-				  System.out.println("Strings: " + githubRepos);
+				  //System.out.println("Strings: " + githubRepos);
 				  return githubRepos;
 			  }catch(IOException e){
 				  

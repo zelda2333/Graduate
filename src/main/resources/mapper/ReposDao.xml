@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.example.demo.dao.ReposDao">
+  
+  <insert id="insertRepos" useGeneratedKeys="true" keyProperty="rId"
+		keyColumn="r_id" parameterType="com.example.demo.entity.Repos">
+		INSERT IGNORE INTO
+		repos(r_name,ssh_url)
+		VALUES
+		(#{rName},#{sshUrl})
+	</insert>
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
+  
+
+
+
+

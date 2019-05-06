@@ -46,7 +46,7 @@
 
     <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;" th:text="hello+' ' + ${session.uname}"> 用户名</div>
    <div class="sideMenu">
-      <h3 class="am-icon-flag"><a href="/stuinfos">学生信息</a></h3>
+      <h3 class="am-icon-flag"><a href="/stuinfo">学生信息</a></h3>
       <h3 class="am-icon-cart-plus"><a href="/scores"> 学生成绩</a></h3>
       <h3 class="am-icon-users on"><a href="/usermanage">用户管理</a></h3>
     </div>
@@ -98,18 +98,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each="usersinfo:${usersinfo}">
+            <tr th:each="users : ${usersinfo}">
               
-              <td class="am-text-center" th:text="${usersinfo.uId}">14</td>
-              <td><a href="#" th:text="${usersinfo.uName}">Wangerer</a></td>
-              <td th:text="${usersinfo.password}">5143</td>
+              <td class="am-text-center" th:text="${users.uId}">14</td>
+              <td><a href="#" th:text="${users.uName}">Wangerer</a></td>
+              <td th:text="${users.password}">5143</td>
               <td class="am-hide-sm-only" th:text="${authorsinfo.authorType}" >老师</td>
-              <!-- th:each="author:${authorsinfo}"  th:text="${author.authorType}" -->
+              
    			 <td>
                	<div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
                   		<button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="修改/添加用户"><span class="am-icon-pencil-square-o"></span></button>
-                      	<a th:href="@{/deleteuser/{id}(id=${usersinfo.uId})}"  class="am-btn am-btn-default am-btn-xs am-text-danger am-round" title="删除用户" ><span class="am-icon-trash-o" ></span></a>
+                      	<a th:href="@{/deleteuser/{id}(id=${users.uId})}"  class="am-btn am-btn-default am-btn-xs am-text-danger am-round" title="删除用户" ><span class="am-icon-trash-o" ></span></a>
                     </div>
                   </div>	
               </td>

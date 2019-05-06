@@ -31,7 +31,7 @@
     <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
  		<li class="kuanjie">
  	
- 			<a href="/stuinfo">学生信息</a>          
+ 			<a href="/stuinfos">学生信息</a>          
  			<a href="/scores">学生成绩</a> 
  			<a href="/usermanage">用户管理</a>   
  		</li>
@@ -87,9 +87,10 @@
           	学生信息
         </ul>
         <dl class="am-icon-home" style="float: right;">当前位置： 学生信息 </dl>
-
+		
       </div>
       <form class="am-form am-g">
+      
         <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
           <thead>
             <tr class="am-success">
@@ -98,22 +99,34 @@
               <th class="">姓名</th>
               <th class="">学号</th>
               <th class="am-hide-sm-only">项目库名称</th>
-             
+              <th class="am-hide-sm-only">操作</th>
+              <th class="am-hide-sm-only">备注</th>
             </tr>
           </thead>
           <tbody>
-            <tr th:each="member:${member}">
-              
-              <td class="am-text-center" th:text="${member}">14</td>
-              <td><a href="#">Wangerer</a></td>
-              <td>5143</td>
-              <td class="am-hide-sm-only">5143-Wangerer</td>
-    
+            <tr th:each="infos : ${stusinfo}">
+             
+              <td class="am-text-center"  th:text="${infos.sId}">14</td>
+               <td><a href="#" th:text="${infos.sName}">Wangerer</a></td>
+              <td th:text="${infos.sNumber}">5143</td>
+              <td class="am-hide-sm-only" th:text="${infos.repos.rName}">5143-Wangerer</td> 
+			  <td>
+               	<div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                    <!-- <p th:text="${infos.repos.sshUrl}">url</p> -->
+                     
+                      <a href="#" th:href="@{/clone(url=${infos.repos.sshUrl},path=${infos.repos.rName})}" class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" title="下载作业" ><span class="am-icon-download" ></span></a>    
+                          
+                    <!-- 
+                    	valuePath
+                         <a href="#" th:href="@{/{path}/clone/{url}(url=${infos.repos.sshUrl},path=${infos.repos.rName})}"  class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" title="下载作业" ><span class="am-icon-download" ></span></a>
+                      -->
+                    </div>
+                  </div>	
+              </td>
+              <td class="am-hide-sm-only" th:text="${test}">下载状态</td> 
             </tr>
-            
-            
-
-          </tbody>
+           </tbody>
         </table>
         
         

@@ -5,6 +5,14 @@ public class GithubRepos {
 	private Long id;
 	//仓库名
 	private String name;
+	private String ssh_url;
+	
+	public String getSsh_url() {
+		return ssh_url;
+	}
+	public void setSsh_url(String ssh_url) {
+		this.ssh_url = ssh_url;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -18,14 +26,8 @@ public class GithubRepos {
 		this.name = name;
 	}
 	
-	/*public String toString() {
-		return "GithubRepos [id=" + id + ", name=" + name + "]";
-	}*/
 	@Override
 	public String toString() {
-		return "GithubRepos{" +
-                "id='" + id + 
-                ", name=" + name +'\'' +
-                '}';
+		return "GithubRepos [id=" + id + ", name=" + name + ", ssh_url=" + ssh_url + "]";
 	}
 }
