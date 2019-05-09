@@ -54,4 +54,7 @@
  		DELETE FROM user WHERE u_id=#{uId}
  	</delete>
  	
+ 	<select id="userList" resultType="com.example.demo.entity.User">
+ 		SELECT * From user
+ 	</select>	
  </mapper>

@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Component;
 
+import com.example.demo.dto.GithubIssue;
 import com.example.demo.dto.GithubMember;
 import com.example.demo.dto.GithubRepos;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,8 +16,10 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.alibaba.fastjson.*;
 
 import okhttp3.Call;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 @Component
 public class GithubProvider {
@@ -66,6 +69,7 @@ public class GithubProvider {
 			           
 				
 	}
+	//get repos list
 	public List<GithubRepos> getRepos(){
 		OkHttpClient client = new OkHttpClient();
 		 Request request = new Request.Builder()
@@ -76,11 +80,58 @@ public class GithubProvider {
 				  Response response = client.newCall(request).execute();
 				  String string = response.body().string();
 				  List<GithubRepos> githubRepos = JSON.parseArray(string, GithubRepos.class);
-				  //System.out.println("Strings: " + githubRepos);
+	  
+				 // System.out.println("Strings: " + githubRepos);
 				  return githubRepos;
 			  }catch(IOException e){
 				  
 			  }
 			  return null;
 	}
+	//create an issue
+	public String postIssue(GithubIssue issue,String uri,String username,String password) {
+        MediaType mediaType = MediaType.get("application/vnd.github.symmetra-preview+json");
+        OkHttpClient client = new OkHttpClient.Builder()
+			    .addInterceptor(new BasicAuthInterceptor(username, password))
+			    .build();
+
+        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(issue));
+        Request request = new Request.Builder()
+                .url(uri)
+                .post(body)
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            String string = response.body().string();
+
+            JSONObject obj = JSONObject.parseObject(string);
+            String title = obj.getString("title");
+           
+            return title;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+	
+	//get an single issue
+	
+	public GithubIssue getAnIssue(String uri){
+		OkHttpClient client = new OkHttpClient();
+		 Request request = new Request.Builder()
+			      .url(uri)
+			      .build();
+
+			  try {
+				  Response response = client.newCall(request).execute();
+				  String string = response.body().string();
+				  GithubIssue githubIssue = JSON.parseObject(string, GithubIssue.class);
+				  
+				System.out.println("Strings: " + githubIssue);
+				  return githubIssue;
+			  }catch(IOException e){
+				  
+			  }
+			  return null;
+	}
+	
 }

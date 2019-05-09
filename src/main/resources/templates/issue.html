@@ -1,0 +1,226 @@
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>学生成绩管理系统</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="assets/i/favicon.png" th:href="@{/assets/i/favicon.png}">
+<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png" th:href="@{assets/i/app-icon72x72@2x.png}">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="stylesheet" href="assets/css/amazeui.min.css"  th:href="@{/assets/css/amazeui.min.css}"/>
+<link rel="stylesheet" href="assets/css/admin.css" th:href="@{/assets/css/admin.css}"/>
+<script src="assets/js/jquery.min.js" th:src="@{/assets/js/jquery.min.js}"></script>
+<script src="assets/js/app.js" th:src="@{/assets/js/app.js}"></script>
+</head>
+<body>
+<!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
+
+
+</head>
+
+<body>
+<header class="am-topbar admin-header">
+  <div class="am-topbar-brand"><img src="assets/i/logo.png" th:src="@{/assets/i/logo.png}"></div>
+
+  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+    <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
+ 		<li class="kuanjie">
+ 	
+ 			<a href="/stuinfo">学生信息</a>          
+ 			<a href="/scores">学生成绩</a> 
+ 			<a href="/usermanage">用户管理</a>   
+ 		</li>
+    </ul>
+  </div>
+</header>
+
+<div class="am-cf admin-main"> 
+
+	<div class="nav-navicon admin-main admin-sidebar">
+    
+
+   		 <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;" th:text="${session.uname}"> 用户名</div>
+  	     <div class="sideMenu">
+      		<h3 class="am-icon-flag"> <a href="/stuinfo">学生信息</a></h3>
+      		<h3 class="am-icon-cart-plus on"> <a href="/scores"> 学生成绩</a></h3>
+      		<h3 class="am-icon-users"> <a href="/usermanage">用户管理</a></h3>
+   		</div>
+    <!-- sideMenu End --> 
+    
+    	<script type="text/javascript">
+			jQuery(".sideMenu").slide({
+				titCell:"h3", //鼠标触发对象
+				targetCell:"ul", //与titCell一一对应，第n个titCell控制第n个targetCell的显示隐藏
+				effect:"slideDown", //targetCell下拉效果
+				delayTime:300 , //效果时间
+				triggerTime:150, //鼠标延迟触发时间（默认150）
+				defaultPlay:true,//默认是否执行效果（默认true）
+				returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
+				});
+		</script> 
+   
+	</div>
+
+
+
+
+
+	<div class=" admin-content">	
+		<div class="daohang">
+			<ul>
+				<li><a href="/scores" type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 查看学生成绩</a> </li>				
+				<li><a href="/addscores" type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 添加成绩/评语</a> </li>				
+			</ul>
+		</div>
+	
+
+    	
+    	<div class="admin-biaogelist">
+			<div class="listbiaoti am-cf">
+       			 <ul class="am-icon-flag on">
+          				学生成绩
+        		</ul>
+       			<dl class="am-icon-home" style="float: right;">当前位置：学生成绩 > <a href="#">添加成绩/评语</a> </dl>
+   			</div>
+	   
+    		<div class="am-tabs am-margin" data-am-tabs>
+    			<ul class="am-tabs-nav am-nav am-nav-tabs">
+      				<li class="am-active"><a href="#tab1">添加成绩</a></li>
+      				<li><a href="#tab2">添加评语</a></li>      
+    			</ul>
+			    <div class="am-tabs-bd">
+      				<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+      			
+      					<div class="am-g am-margin-top">
+          					<form class="am-form" th:action="@{/insertscore}" method="post" >
+          						<div class="am-g am-margin-top-sm" >
+            						<div class="am-u-sm-4 am-u-md-2 am-text-right">
+             						 学生ID：
+            						</div>
+            						<div class="am-u-sm-8 am-u-md-4 am-u-end" >
+            						<input name="sId" th:value = "${stu!=null}?${stu.sId}" style="cursor: initial;border: none;background-color: white;" type="text" class="am-input-sm" readonly="readonly" />
+            							
+               						</div>
+          						</div>
+          						<div class="am-g am-margin-top-sm">
+            						<div class="am-u-sm-4 am-u-md-2 am-text-right">
+             						 学生姓名：
+            						</div>
+            						<div class="am-u-sm-8 am-u-md-4 am-u-end" >
+            							<span th:text="${stu!=null}?${stu.sName}">王泽坤</span>
+               						</div>
+          						</div>
+
+          						<div class="am-g am-margin-top-sm">
+           							<div class="am-u-sm-4 am-u-md-2 am-text-right">
+             						学生学号：
+            						</div>
+           							<div class="am-u-sm-8 am-u-md-4 am-u-end">
+                                    <span th:text="${stu!=null}?${stu.sNumber}">6103115143</span>
+            							 </div>
+                           		</div>
+								<div class="am-g am-margin-top-sm">
+                        			<div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    	第几次成绩	
+                                    </div>
+                       				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+                                       	<input type="text" class="am-input-sm" name="number" >
+                                   </div>
+          	            		</div>
+          						<div class="am-g am-margin-top-sm">
+                        			<div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    	成绩	
+                                    </div>
+                       				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+                                       	<input type="text" class="am-input-sm" name="score" >
+                                   </div>
+          	            		</div>
+          	            		<div class="am-margin" style="float:right;">
+    								<button type="submit" class="am-btn am-btn-success am-radius " >提交</button>
+    
+  								</div>
+        					</form>
+           				 </div>
+      				</div>
+
+      <div class="am-tab-panel am-fade" id="tab2">
+        <form class="am-form" action="/postissue" method="post">
+        	<div class="am-g am-margin-top">
+           		 <div class="am-u-sm-4 am-u-md-2 am-text-right">
+             	仓库名
+           		 </div>
+           		 <div class="am-u-sm-8 am-u-md-4">
+           		 	
+            		  <input type="text" class="am-input-sm" name="rName" th:value="test">
+           		 </div>
+            		<div class="am-hide-sm-only am-u-md-6"></div>
+         		 </div>
+          <div class="am-g am-margin-top">
+            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+             	评语标题
+            </div>
+            <div class="am-u-sm-8 am-u-md-4">
+              <input type="text" class="am-input-sm" name="title">
+            </div>
+            <div class="am-hide-sm-only am-u-md-6"></div>
+          </div>
+
+          <div class="am-g am-margin-top-sm">
+            <div class="am-u-sm-12 am-u-md-2 am-text-right admin-form-text">
+           	  评语 内容
+            </div>
+            <div class="am-u-sm-12 am-u-md-10">
+              <textarea rows="10" name="body"></textarea>
+            </div>
+          </div>
+          <p th:text="${mgs}"></p>
+          
+		<div class="am-margin" style="float:right;">
+   				 <button type="submit" class="am-btn am-btn-success am-radius ">提交</button>
+    
+  		</div>
+        </form>
+      </div>
+
+       
+    </div>
+  </div>
+
+  
+  
+    
+ 
+
+     			<div class="foods">
+       				 <ul> @zelda-2019 </ul>
+       				 <dl>
+          				<a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
+       				 </dl>
+      			</div>
+    	</div>
+		
+	</div>
+
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js" th:src="@{/assets/js/polyfill/rem.min.js}"></script>
+<script src="assets/js/polyfill/respond.min.js" th:src="@{/assets/js/polyfill/respond.min.js}"></script>
+<script src="assets/js/amazeui.legacy.js" th:src="@{/assets/js/amazeui.legacy.js}"></script>
+<![endif]--> 
+
+<!--[if (gte IE 9)|!(IE)]><!--> 
+<script src="assets/js/amazeui.min.js" th:src="@{/assets/js/amazeui.min.js}"></script>
+<!--<![endif]-->
+
+
+
+</body>
+</html>

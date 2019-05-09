@@ -10,8 +10,8 @@ public interface UserDao {
 	
 	User login(String uname,String password);
 	 List<User> findByUsername(String uname);
-	int userIsExist(String uname);
-	List<User> ListUser();
+	List<User> userList();
+	
 	User ListUserById(int uId);
 	int addUser(User user);
 	int updateUser(User user);

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.example.demo.dao.ScoresDao">
+  <select id="FindScoresAndInfoByScoreId" resultMap="ScoresAndInfo">
+		SELECT studentscores.score_id,studentscores.score,studentscores.number,studentinfo.s_id,studentinfo.s_name,studentinfo.s_number
+		 FROM studentscores,studentinfo
+		 WHERE studentscores.s_id = studentinfo.s_id AND studentscores.score_id=#{scoreId}
+	</select>
+  
+  
+  <select id="ListScoresAndInfo" resultMap="ScoresAndInfo">
+		SELECT studentscores.score_id,studentscores.score,studentscores.number,studentinfo.s_id,studentinfo.s_name,studentinfo.s_number
+		 FROM studentscores,studentinfo
+		 WHERE studentscores.s_id = studentinfo.s_id
+	</select>
+	<resultMap id="ScoresAndInfo" type="com.example.demo.entity.ScoresAndInfo">
+		<id property="scoreId" column="score_id"></id>
+		<result property="sId" column="s_id"></result>
+		<result property="score" column="score"></result>
+		<result property="number" column="number"></result>
+		 <association property="stuinfo" javaType="StudentInfo">
+            <id property="sId" column="s_id"></id>
+		<result property="sName" column="s_name"></result>
+		<result property="sNumber" column="s_number"></result>
+        </association>
+	</resultMap>
+  
+  
+  <insert id="addScores" useGeneratedKeys="true" keyProperty="scoreId"
+		keyColumn="score_id" parameterType="com.example.demo.entity.StudentScores">
+		INSERT INTO
+		studentscores(s_id,score,number)
+		VALUES
+		(#{sId},#{score},#{number})
+	</insert>
+  <update id="updateScores" parameterType="com.example.demo.entity.StudentScores">
+ 		update studentscores
+ 		<set>
+ 			<if test="score!=null">score=#{score}</if>			
+ 		</set>
+ 		where score_id=#{scoreId}
+ 	</update>
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
+  
+
+
+
+

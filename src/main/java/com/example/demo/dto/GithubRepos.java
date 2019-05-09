@@ -6,7 +6,15 @@ public class GithubRepos {
 	//仓库名
 	private String name;
 	private String ssh_url;
+	private Owner owner;
 	
+	
+	public Owner getOwner() {
+		return owner;
+	}
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
 	public String getSsh_url() {
 		return ssh_url;
 	}
@@ -28,6 +36,6 @@ public class GithubRepos {
 	
 	@Override
 	public String toString() {
-		return "GithubRepos [id=" + id + ", name=" + name + ", ssh_url=" + ssh_url + "]";
+		return "GithubRepos [id=" + id + ", name=" + name + ", ssh_url=" + ssh_url + ", owner=" + owner + "]";
 	}
 }

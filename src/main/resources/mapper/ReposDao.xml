@@ -7,9 +7,9 @@
   <insert id="insertRepos" useGeneratedKeys="true" keyProperty="rId"
 		keyColumn="r_id" parameterType="com.example.demo.entity.Repos">
 		INSERT IGNORE INTO
-		repos(r_name,ssh_url)
+		repos(r_name,ssh_url,owner)
 		VALUES
-		(#{rName},#{sshUrl})
+		(#{rName},#{sshUrl},#{owner})
 	</insert>
   
   

@@ -38,9 +38,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/usermanage", method = RequestMethod.GET)
 	private Model listUser(Model model) {
-		//Map<String, Object> modelMap = new HashMap<String, Object>();
-		//List<User> list = new ArrayList<User>();
-		//list = userService.ListUser();
 		// 获取已注册的用户列表
 		
 		List<UserAndAuthor> list = userDao.ListUserAndAuthor();

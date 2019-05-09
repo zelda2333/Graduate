@@ -31,7 +31,7 @@
     <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
  		<li class="kuanjie">
  	
- 			<a href="/stuinfos">学生信息</a>          
+ 			<a href="/stuinfo">学生信息</a>          
  			<a href="/scores">学生成绩</a> 
  			<a href="/usermanage">用户管理</a>   
  		</li>
@@ -76,7 +76,9 @@
 	
 		<div class="daohang">
 			<ul>
-				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 学生成绩</button> </li>				
+				<li><a href="/scores" type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 查看学生成绩</a> </li>				
+				<li><a href="/addscores" type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 添加成绩/评语</a> </li>				
+		
 			</ul>
 		</div>
 	
@@ -96,32 +98,26 @@
               <th class="table-id am-text-center">ID</th>
               <th class="">姓名</th>
               <th class="">学号</th>
-              <th class="am-hide-sm-only">项目库名称</th>
               <th class="">成绩</th>
-             <th class="">评语标题</th>
-             <th class="" style="width:30%;">评语内容</th>
-             <th class="">标签</th>
-             <th width="130px" class="table-set">操作</th>
+              <th class="">第几次成绩</th>
+              <th width="130px" class="table-set">操作</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr th:each="scores : ${scoresinfo}">
               
-              <td class="am-text-center">14</td>
-              <td><a href="#">zelda</a></td>
-              <td>5143</td>
-              <td class="am-hide-sm-only">5143-Wangerer</td>
-   			 <td>94</td>
-   			 <td>第一次作业</td>
-   			 <td>写的不错继续努力努力努力力力力力力力力力力力力力力力力力力力力
-   			 力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力
-   			 力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力力</td>
-   			 <td>1</td>
+              <td class="am-text-center" th:text="${scores.sId}">14</td>
+              <td><a href="#" th:text="${scores.stuinfo.sName}">zelda</a></td>
+              <td th:text="${scores.stuinfo.sNumber}">5143</td>
+              <td th:text="${scores.score}">94</td>
+              <td th:text="${scores.number}">1</td>
    			 <td>
                	<div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                  		<button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="修改/添加成绩"><span class="am-icon-pencil-square-o"></span></button>
-                      	<button class="am-btn am-btn-default am-btn-xs am-text-danger am-round" title="删除学生成绩"><span class="am-icon-trash-o" ></span></button>
+                    
+                  		<a th:href="@{/listoneissue/{repoName}/{issueNum}(repoName=${scores.stuinfo.sNumber},issueNum=${scores.number})}" class="am-btn am-btn-default am-btn-xs am-text-success am-round" title="查看评论详情"><span class="am-icon-file" ></span></a>
+                  		<a th:href="@{/upscores/}+${scores.scoreId}" class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" title="修改成绩"><span class="am-icon-pencil-square-o"></span></a>
+                      	
                     </div>
                   </div>	
                 </td>
@@ -131,11 +127,24 @@
 
           </tbody>
         </table>
+        <div>
+         <div class="am-btn-group" style="float:right;margin-bottom: 5px;">
+     		<a href="/toexcel" class="am-btn am-btn-success am-icon-file-excel-o" title="导出Excel表" style="
+  					padding: 6px;
+  					width: 110px;
+  					height: 37px;
+  					border-radius: 4px;">  					
+  			<span style="font-size: xx-small;">导出excel表</span>
+  			</a>
+     		
+        </div>
         
-        
-        <hr />
+        </div>
+       
       </form>
-
+	  
+       
+                    	
       <div class="foods">
         <ul> @zelda-2019 </ul>
         <dl>

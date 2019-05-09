@@ -41,6 +41,7 @@ public class StuInfoController {
 			Repos repos = new Repos();
 			repos.setrName(gRepos.getName());
 			repos.setSshUrl(gRepos.getSsh_url());
+			repos.setOwner(gRepos.getOwner().getLogin());
 			reposDao.insertRepos(repos);
 		  }
 		
@@ -54,20 +55,18 @@ public class StuInfoController {
 			
 		}
 		
-		
-		//System.out.println(githubProvider.getRepos());
-//		return "redirect:/stuinfo";
 		return model;
 	}
 	
 	
-	//@GetMapping("/stuinfos")
+	@GetMapping("/stuinfos")
 	public String getMember(Map<String, Object> map, HttpSession session){
 		//String githubRepos = githubProvider.getRepos(); 
 		//List<ArrayList> member= new ArrayList<>();
 		//member = githubProvider.getMembers("zelda2333", "964544758dzx1");
 		//map.put("member",member);
-		System.out.println( "hello " + githubProvider.getMembers("zelda2333", "964544758dzx1"));
+		githubProvider.getRepos();
+		//System.out.println( "hello " + githubProvider.getMembers("zelda2333", "964544758dzx1"));
 		return "redirect:/stuinfo";
 	}
 	

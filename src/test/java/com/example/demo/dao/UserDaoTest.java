@@ -19,14 +19,14 @@ import com.example.demo.entity.UserAndAuthor;
 public class UserDaoTest {
 	@Autowired
 	private UserDao userDao;
-	
+	/*
 	@Test
-	
+	@Ignore
 	public void TestListUser() {
 		List<User> userlist=userDao.ListUser();
 		System.out.println(userlist.toString()+"123");
 		assertNotNull(userlist);
-	}
+	}*/
 	@Test
 	@Ignore
 	public void ListUserById() {

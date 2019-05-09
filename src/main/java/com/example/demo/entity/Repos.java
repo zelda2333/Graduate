@@ -6,6 +6,7 @@ public class Repos {
 	
 	private String rName;
 	private String sshUrl;
+	private String owner;
 	
 	public String getSshUrl() {
 		return sshUrl;
@@ -33,7 +34,15 @@ public class Repos {
 
 	@Override
 	public String toString() {
-		return "Repos [rId=" + rId + ", rName=" + rName + ", sshUrl=" + sshUrl + "]";
+		return "Repos [rId=" + rId + ", rName=" + rName + ", sshUrl=" + sshUrl + ", owner=" + owner + "]";
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
 	}
 	
 }

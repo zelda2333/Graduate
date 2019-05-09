@@ -30,9 +30,7 @@ public class UserService {
 	    /**
 	     *管理员查询当前的所有用户
 	     */
-	    public List<User> ListUser(){
-	        return userDao.ListUser();
-	    }
+	
 
 	    /**
 	     * 修改用户信息
