@@ -27,7 +27,7 @@ public class CloneController {
 		System.out.println(localPath);
 		String cloneResult = gitUtil.cloneRepository("git@github.com:zelda2333/test.git", local);
 		// 下载
-		
+		model.addAttribute("test", "test");
 		model.addAttribute("msg", "正在下载，请稍等");
 		if(cloneResult=="success"){
 			model.addAttribute("msg", "下载完成");
@@ -35,6 +35,6 @@ public class CloneController {
 			model.addAttribute("msg", "下载失败");
 		}
 		
-		return "redirect:/stuinfo";
+		return "stuinfo";
 	}
 }

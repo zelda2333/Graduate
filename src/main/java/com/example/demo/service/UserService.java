@@ -23,7 +23,7 @@ public class UserService {
 	    /**
 	     * 通过名字查询用户信息
 	     */
-	    public List<User> queryByName(String uname){
+	    public User queryByName(String uname){
 	        return userDao.findByUsername(uname);
 	    }
 

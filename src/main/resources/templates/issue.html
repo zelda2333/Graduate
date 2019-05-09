@@ -46,10 +46,24 @@
 
    		 <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;" th:text="${session.uname}"> 用户名</div>
   	     <div class="sideMenu">
-      		<h3 class="am-icon-flag"> <a href="/stuinfo">学生信息</a></h3>
-      		<h3 class="am-icon-cart-plus on"> <a href="/scores"> 学生成绩</a></h3>
-      		<h3 class="am-icon-users"> <a href="/usermanage">用户管理</a></h3>
-   		</div>
+      <h3 class="am-icon-flag"><em></em> <a href="/stuinfo">学生信息</a></h3>
+      <ul>
+        <li><a href="/stuinfo">下载作业</a></li>
+      </ul>
+      <h3 class="am-icon-cart-plus on"><em></em> <a href="/scores"> 学生成绩</a></h3>
+      <ul>
+        <li><a href="/scores">查看成绩</a></li>
+        <li><a href="/addscores">添加成绩/评语</a></li>
+        
+      </ul>
+      <h3 class="am-icon-users"><em></em> <a th:href="@{/upuser/}+${session.uname}">用户管理</a></h3>
+      <ul>
+      	<li><a th:href="@{/upuser/}+${session.uname}">修改密码</a></li>
+        <li><a href="/usermanage" th:style="'display:' + @{(${session.author==2} ? 'none' : 'unset')} + ''">查看管理员</a></li>
+        <li><a href="/postuser" th:style="'display:' + @{(${session.author==2} ? 'none' : 'unset')} + ''">添加管理员</a></li>
+      </ul>
+     
+    </div>
     <!-- sideMenu End --> 
     
     	<script type="text/javascript">
@@ -89,75 +103,20 @@
    			</div>
 	   
     		<div class="am-tabs am-margin" data-am-tabs>
-    			<ul class="am-tabs-nav am-nav am-nav-tabs">
-      				<li class="am-active"><a href="#tab1">添加成绩</a></li>
-      				<li><a href="#tab2">添加评语</a></li>      
+    			<ul class="am-tabs-nav am-nav">
+      				
+      				<li><a href="#tab2" style="color: #555;
+    										background-color: #fff;
+    										border-top: 1px solid #ddd;
+    										border-right: 1px solid #ddd;
+    										border-left: 1px solid #ddd;">添加评语</a></li>      
     			</ul>
 			    <div class="am-tabs-bd">
-      				<div class="am-tab-panel am-fade am-in am-active" id="tab1">
-      			
-      					<div class="am-g am-margin-top">
-          					<form class="am-form" th:action="@{/insertscore}" method="post" >
-          						<div class="am-g am-margin-top-sm" >
-            						<div class="am-u-sm-4 am-u-md-2 am-text-right">
-             						 学生ID：
-            						</div>
-            						<div class="am-u-sm-8 am-u-md-4 am-u-end" >
-            						<input name="sId" th:value = "${stu!=null}?${stu.sId}" style="cursor: initial;border: none;background-color: white;" type="text" class="am-input-sm" readonly="readonly" />
-            							
-               						</div>
-          						</div>
-          						<div class="am-g am-margin-top-sm">
-            						<div class="am-u-sm-4 am-u-md-2 am-text-right">
-             						 学生姓名：
-            						</div>
-            						<div class="am-u-sm-8 am-u-md-4 am-u-end" >
-            							<span th:text="${stu!=null}?${stu.sName}">王泽坤</span>
-               						</div>
-          						</div>
-
-          						<div class="am-g am-margin-top-sm">
-           							<div class="am-u-sm-4 am-u-md-2 am-text-right">
-             						学生学号：
-            						</div>
-           							<div class="am-u-sm-8 am-u-md-4 am-u-end">
-                                    <span th:text="${stu!=null}?${stu.sNumber}">6103115143</span>
-            							 </div>
-                           		</div>
-								<div class="am-g am-margin-top-sm">
-                        			<div class="am-u-sm-4 am-u-md-2 am-text-right">
-                                    	第几次成绩	
-                                    </div>
-                       				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-                                       	<input type="text" class="am-input-sm" name="number" >
-                                   </div>
-          	            		</div>
-          						<div class="am-g am-margin-top-sm">
-                        			<div class="am-u-sm-4 am-u-md-2 am-text-right">
-                                    	成绩	
-                                    </div>
-                       				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-                                       	<input type="text" class="am-input-sm" name="score" >
-                                   </div>
-          	            		</div>
-          	            		<div class="am-margin" style="float:right;">
-    								<button type="submit" class="am-btn am-btn-success am-radius " >提交</button>
-    
-  								</div>
-        					</form>
-           				 </div>
-      				</div>
-
       <div class="am-tab-panel am-fade" id="tab2">
         <form class="am-form" action="/postissue" method="post">
         	<div class="am-g am-margin-top">
-           		 <div class="am-u-sm-4 am-u-md-2 am-text-right">
-             	仓库名
-           		 </div>
-           		 <div class="am-u-sm-8 am-u-md-4">
-           		 	
-            		  <input type="text" class="am-input-sm" name="rName" th:value="test">
-           		 </div>
+           		 <input type="hidden" class="am-input-sm" name="rName" th:value="${reposName}">
+           		
             		<div class="am-hide-sm-only am-u-md-6"></div>
          		 </div>
           <div class="am-g am-margin-top">

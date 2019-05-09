@@ -9,11 +9,13 @@ public interface UserDao {
 	List<UserAndAuthor> ListUserAndAuthor();
 	
 	User login(String uname,String password);
-	 List<User> findByUsername(String uname);
+	User findByUsername(String uname);
 	List<User> userList();
+	//int existsByUserName(String uname);
 	
 	User ListUserById(int uId);
 	int addUser(User user);
+	//修改密码
 	int updateUser(User user);
 	int deleteUser(int uId);
 }

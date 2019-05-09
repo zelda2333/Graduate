@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.GithubIssue;
 import com.example.demo.entity.ScoresAndInfo;
+import com.example.demo.entity.StudentInfo;
 import com.example.demo.provider.GithubProvider;
 
 @Controller
@@ -25,6 +26,25 @@ public class IssueController {
 	private GithubProvider githubProvider;
 	@Value("${github.repos.user}")
     private String loginer;
+	
+	//显示当前仓库信息，在页面回显
+	
+		@RequestMapping(value = "/issue/{repos}",method={RequestMethod.GET})
+		 public String ListStuBysId(@PathVariable("repos") String repos, Model model){
+			 		 
+			 model.addAttribute("reposName",repos);
+			 System.out.println("reposName: " + repos);
+				
+			//去添加issue and score
+		    //return "redirect:/issue";
+		    return "issue";
+			//return model;
+		 }
+	
+	
+	
+	
+	
 	
 	@PostMapping(value="/postissue")
 	public String postIssue(@RequestParam("rName") String rname,
@@ -38,7 +58,7 @@ public class IssueController {
 			model.addAttribute("msg", "添加成功");
 		}
 		
-		return "issue";
+		return "redirect:/addscores";
 	}
 	
 	

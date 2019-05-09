@@ -1,5 +1,4 @@
 <!doctype html>
-<!doctype html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
@@ -94,13 +93,12 @@
 		</div>
 	
 
-    	
     	<div class="admin-biaogelist">
 			<div class="listbiaoti am-cf">
-       			 <ul class="am-icon-flag on">
+       			 <ul class="am-icon-flag">
           				学生成绩
         		</ul>
-       			<dl class="am-icon-home" style="float: right;">当前位置：学生成绩 > <a href="#">添加成绩/评语</a> </dl>
+       			<dl class="am-icon-home" style="float: right;">当前位置：学生成绩 > <a href="/addscores">添加成绩/评语</a> </dl>
    			</div>
 	   
     		<div class="am-tabs am-margin" data-am-tabs>
@@ -111,40 +109,68 @@
     										border-top: 1px solid #ddd;
     										border-right: 1px solid #ddd;
     										border-left: 1px solid #ddd;">
-    							查看评语</a></li>      
+    							添加成绩</a></li>      
     			</ul>
 			    <div class="am-tabs-bd">
       			
 
       <div class="am-tab-panel am-fade" id="tab2">
-        <form class="am-form">
-        	<div class="am-g am-margin-top">
-           		 <div class="am-u-sm-4 am-u-md-2 am-text-right">
-             		title:
-           		 </div>
-           		 <div class="am-u-sm-8 am-u-md-4">
-           		 	<span th:text="${issue.title==null}?此次成绩未添加评语:${issue.title}"></span>
-           		 </div>
-            		<div class="am-hide-sm-only am-u-md-6"></div>
-         		 </div>
-          <div class="am-g am-margin-top">
-            <div class="am-u-sm-4 am-u-md-2 am-text-right">
-             	body:
-            </div>
-            <div class="am-u-sm-8 am-u-md-4">
-              <span th:text="${issue.body==null}?此次成绩未添加评语:${issue.body}"></span>
-            </div>
-            <div class="am-hide-sm-only am-u-md-6"></div>
-          </div>
+   
+      					<form class="am-form" th:action="@{/insertscore}" method="post" >
+      					<div class="am-g am-margin-top">
+          					
+          						<div class="am-g am-margin-top-sm" >
+            						<div class="am-u-sm-4 am-u-md-2 am-text-right">
+             						 学生ID：
+            						</div>
+            						<div class="am-u-sm-8 am-u-md-4 am-u-end" >
+            						<input name="sId" th:value = "${stu!=null}?${stu.sId}" style="cursor: initial;border: none;background-color: white;" type="text" class="am-input-sm" readonly="readonly" />
+            							
+               						</div>
+          						</div>
+          						<div class="am-g am-margin-top-sm">
+            						<div class="am-u-sm-4 am-u-md-2 am-text-right">
+             						 学生姓名：
+            						</div>
+            						<div class="am-u-sm-8 am-u-md-4 am-u-end" >
+            							<span th:text="${stu!=null}?${stu.sName}">王泽坤</span>
+               						</div>
+          						</div>
 
-          
-          <p th:text="${mgs}"></p>
-          
-		<div class="am-margin" style="float:right;">
-   				 <a href="/scores" type="buttun" class="am-btn am-btn-success am-radius ">返回</a>
+          						<div class="am-g am-margin-top-sm">
+           							<div class="am-u-sm-4 am-u-md-2 am-text-right">
+             						学生学号：
+            						</div>
+           							<div class="am-u-sm-8 am-u-md-4 am-u-end">
+                                    <span th:text="${stu!=null}?${stu.sNumber}">6103115143</span>
+            							 </div>
+                           		</div>
+								<div class="am-g am-margin-top-sm">
+                        			<div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    	第几次成绩	
+                                    </div>
+                       				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+                                       	<input type="text" class="am-input-sm" name="number" >
+                                   </div>
+          	            		</div>
+          						<div class="am-g am-margin-top-sm">
+                        			<div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                    	成绩	
+                                    </div>
+                       				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+                                       	<input type="text" class="am-input-sm" name="score" >
+                                   </div>
+          	            		</div>
+          	            		<div class="am-margin" style="float:right;">
+    								<button type="submit" class="am-btn am-btn-success am-radius " >提交</button>
     
-  		</div>
-        </form>
+  								</div>
+        					
+           				 </div>
+           				</form>
+      				</div>
+
+     
       </div>
 
        

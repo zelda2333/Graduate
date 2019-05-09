@@ -45,7 +45,7 @@
  		<set>
  			<if test="uName!=null">u_name=#{uName}</if>
  			<if test="password!=null">password=#{password}</if>
- 			<if test="authorId!=null">author_id=#{authorId}</if>
+ 			
  			
  		</set>
  		where u_id=#{uId}
@@ -56,5 +56,11 @@
  	
  	<select id="userList" resultType="com.example.demo.entity.User">
  		SELECT * From user
- 	</select>	
+ 	</select>
+ 	
+ 	<select id="existsByUserName" resultType="com.example.demo.entity.User">
+ 		SELECT count(*) From user WHERE u_name=#{uName};
+ 	</select>
+ 	
+ 		
  </mapper>

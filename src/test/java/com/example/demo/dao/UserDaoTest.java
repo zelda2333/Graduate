@@ -60,6 +60,17 @@ public class UserDaoTest {
 		int effectedNum = userDao.deleteUser(4);
 		assertEquals(1,effectedNum);
 	}
+	
+	@Test
+	
+	public void existsByUserName() {
+		
+		User effectedNum = userDao.findByUsername("123");
+		//assertEquals(1,effectedNum);
+	}
+	
+	
+	
 }
 
 

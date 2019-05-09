@@ -28,23 +28,26 @@ public class LoginController {
                       @RequestParam("password") String password,
                       Map<String, Object> map,
                       HttpSession session){
-        List<User> list = userService.queryByName(uname);
+        User list = userService.queryByName(uname);
+        int authorId = list.getAuthorId();
         if(uname==null || password==null){
             //提醒用户输入完整登陆信息
             map.put("msg", "提醒用户输入完整登陆信息");
             return "index";
-        }else if(list.size()==0){
+        }else if(list.getuId()==null
+        		/*.size()==0*/){
             //提醒登陆出错的信息原因
             map.put("msg", "用户不存在，请重新输入");
             //返回登陆界面
             return "index";
-        }else if(!list.get(0).getPassword().equals(password)){
+        }else if(!list.getPassword().equals(password)){
             //提醒用户输入的密码不正确
             map.put("msg", "提醒用户输入的密码不正确");
             return "index";
         }else{
         	session.setAttribute("uname",uname);
-            session.setAttribute("user",list);
+        	System.out.println(authorId);
+            session.setAttribute("author",authorId);
             return "redirect:/stuinfo";
         }
     }

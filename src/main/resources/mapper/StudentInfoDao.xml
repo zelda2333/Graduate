@@ -6,7 +6,7 @@
 	<select id="ListStudentInfoAndRepos" resultMap="StudentInfoAndRepos">
 		SELECT studentinfo.s_id,studentinfo.s_name,studentinfo.s_number,repos.r_name,repos.ssh_url,repos.owner
 		 FROM studentinfo,repos
-		 WHERE studentinfo.s_number = repos.r_name
+		 WHERE studentinfo.s_number = repos.r_name ORDER BY studentinfo.s_id ASC
 	</select>
 	<resultMap id="StudentInfoAndRepos" type="com.example.demo.entity.StudentInfoAndRepos">
 		<id property="sId" column="s_id"></id>

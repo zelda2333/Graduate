@@ -9,19 +9,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="assets/i/favicon.png">
-<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+<link rel="icon" type="image/png" href="assets/i/favicon.png" th:href="@{/assets/i/favicon.png}">
+<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png" th:href="@{assets/i/app-icon72x72@2x.png}">
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="stylesheet" href="assets/css/amazeui.min.css"/>
-<link rel="stylesheet" href="assets/css/admin.css">
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/app.js"></script>
+<link rel="stylesheet" href="assets/css/amazeui.min.css"  th:href="@{/assets/css/amazeui.min.css}"/>
+<link rel="stylesheet" href="assets/css/admin.css" th:href="@{/assets/css/admin.css}"/>
+<script src="assets/js/jquery.min.js" th:src="@{/assets/js/jquery.min.js}"></script>
+<script src="assets/js/app.js" th:src="@{/assets/js/app.js}"></script>
+
+
+
+
+
 </head>
-<body>
+
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
 
-
-</head>
 
 <body>
 <header class="am-topbar admin-header">
@@ -45,13 +48,36 @@
     
 
     <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;" th:text="hello+' ' + ${session.uname}"> 用户名</div>
-   <div class="sideMenu">
-      <h3 class="am-icon-flag"><a href="/stuinfo">学生信息</a></h3>
-      <h3 class="am-icon-cart-plus"><a href="/scores"> 学生成绩</a></h3>
-      <h3 class="am-icon-users on"><a href="/usermanage">用户管理</a></h3>
+   	<div class="sideMenu">
+      		<h3 class="am-icon-flag"><em></em> <a href="/stuinfo">学生信息</a></h3>
+      		
+      		<ul>
+       		 	<li><a href="/stuinfo">下载作业</a></li>
+      		</ul>
+      		<h3 class="am-icon-cart-plus"><em></em> <a href="/scores"> 学生成绩</a></h3>
+      		<ul>
+      		  <li><a href="/scores">查看成绩</a></li>
+        	  <li><a href="/addscores">添加成绩/评语</a></li>
+        
+      		</ul>
+     		<h3 class="am-icon-users on"><em></em> <a th:href="@{/upuser/}+${session.uname}">用户管理</a></h3>
+      		<ul>
+      			<li><a th:href="@{/upuser/}+${session.uname}">修改密码</a></li>
+        		<li><a href="/usermanage">查看管理员</a></li>
+        		<li><a href="/postuser">添加管理员</a></li>
+      		</ul>
+     
     </div>
-    <!-- sideMenu End --> 
     
+    <!-- sideMenu End --> 
+
+
+
+
+
+
+
+
     <script type="text/javascript">
 			jQuery(".sideMenu").slide({
 				titCell:"h3", //鼠标触发对象
@@ -71,7 +97,8 @@
 	
 		<div class="daohang">
 			<ul>
-				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 用户管理</button> </li>				
+				<li><a href="/usermanage" type="button" class="am-btn am-btn-default am-radius am-btn-xs none-author"> 查看管理员</a> </li>				
+				<li><a href="/postuser" type="button" class="am-btn am-btn-default am-radius am-btn-xs none-author"> 添加管理员</a> </li>				
 			</ul>
 		</div>
 	
@@ -80,8 +107,10 @@
         <ul class="am-icon-users">
           	用户管理
         </ul>
-        <dl class="am-icon-home" style="float: right;">当前位置： 用户管理 </dl>
-
+        <dl class="am-icon-home" style="float: right;">当前位置： 用户管理 > <a href="#"> 查看管理员</a> </dl>
+		<dl>
+          <a href="/postuser" class="am-btn am-btn-danger am-round am-btn-xs am-icon-user-plus">  添加管理员</a>
+        </dl>
       </div>
       <form class="am-form am-g">
         <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
@@ -108,7 +137,7 @@
    			 <td>
                	<div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                  		<button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}" title="修改/添加用户"><span class="am-icon-pencil-square-o"></span></button>
+                  		<a th:href="@{/upadmin/}+${users.uName}" class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" title="修改用户"><span class="am-icon-pencil-square-o"></span></a>
                       	<a th:href="@{/deleteuser/{id}(id=${users.uId})}"  class="am-btn am-btn-default am-btn-xs am-text-danger am-round" title="删除用户" ><span class="am-icon-trash-o" ></span></a>
                     </div>
                   </div>	
@@ -122,7 +151,8 @@
           </tbody>
         </table>
         <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}">123</p>
-        
+        <!-- <div th:style="'display:' + @{(${session.author==1} ? 'none' : 'unset')} + ''">12345</div> -->
+       
         <hr />
       </form>
 
@@ -141,6 +171,7 @@
 		
 		
 		
+	
 		
 		
 		

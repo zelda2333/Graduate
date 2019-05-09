@@ -9,13 +9,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="assets/i/favicon.png">
-<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+<link rel="icon" type="image/png" href="assets/i/favicon.png" th:href="@{/assets/i/favicon.png}">
+<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png" th:href="@{assets/i/app-icon72x72@2x.png}">
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="stylesheet" href="assets/css/amazeui.min.css"/>
-<link rel="stylesheet" href="assets/css/admin.css">
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/app.js"></script>
+<link rel="stylesheet" href="assets/css/amazeui.min.css"  th:href="@{/assets/css/amazeui.min.css}"/>
+<link rel="stylesheet" href="assets/css/admin.css" th:href="@{/assets/css/admin.css}"/>
+<script src="assets/js/jquery.min.js" th:src="@{/assets/js/jquery.min.js}"></script>
+<script src="assets/js/app.js" th:src="@{/assets/js/app.js}"></script>
 </head>
 <body>
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
@@ -46,10 +46,24 @@
 
    		 <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;" th:text="${session.uname}"> 用户名</div>
   	     <div class="sideMenu">
-      		<h3 class="am-icon-flag"> <a href="/stuinfo">学生信息</a></h3>
-      		<h3 class="am-icon-cart-plus on"> <a href="/scores"> 学生成绩</a></h3>
-      		<h3 class="am-icon-users"> <a href="/usermanage">用户管理</a></h3>
-   		</div>
+      <h3 class="am-icon-flag"><em></em> <a href="/stuinfo">学生信息</a></h3>
+      <ul>
+        <li><a href="/stuinfo">下载作业</a></li>
+      </ul>
+      <h3 class="am-icon-cart-plus on"><em></em> <a href="/scores"> 学生成绩</a></h3>
+      <ul>
+        <li><a href="/scores">查看成绩</a></li>
+        <li><a href="/addscores">添加成绩/评语</a></li>
+        
+      </ul>
+      <h3 class="am-icon-users"><em></em> <a th:href="@{/upuser/}+${session.uname}">用户管理</a></h3>
+      <ul>
+      	<li><a th:href="@{/upuser/}+${session.uname}">修改密码</a></li>
+        <li><a href="/usermanage" th:style="'display:' + @{(${session.author==2} ? 'none' : 'unset')} + ''">查看管理员</a></li>
+        <li><a href="/postuser" th:style="'display:' + @{(${session.author==2} ? 'none' : 'unset')} + ''">添加管理员</a></li>
+      </ul>
+     
+    </div>
     <!-- sideMenu End --> 
     
     	<script type="text/javascript">
@@ -91,16 +105,16 @@
       			<form class="am-form am-g">
           			<table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
          				 <thead>
-            				<tr class="am-success">              
-             					 <th class="table-id am-text-center">ID</th>
+            				<tr class="am-success am-text-center">              
+             					 <th class="table-id am-text-center" style="width:8%;">ID</th>
               					 <th class="">姓名</th>
               					 <th class="">学号</th>
-              					 <th class="am-hide-sm-only">操作</th>
+              					 <th class="am-hide-sm-only" style="width: 20%;">操作</th>
                     		</tr>
           				 </thead>
           				 
           				 <tbody>
-            				<tr th:each="infos : ${stusinfo}">             
+            				<tr th:each="infos : ${stusinfo}" >             
               					<td class="am-text-center"  th:text="${infos.sId}">14</td>
                					<td><a href="#" th:text="${infos.sName}">Wangerer</a></td>
               					<td th:text="${infos.sNumber}">5143</td>
@@ -108,7 +122,9 @@
                						<div class="am-btn-toolbar">
                    						 <div class="am-btn-group am-btn-group-xs">
                    
-                    						 <a th:href="@{/issue/}+${infos.sId}" class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-plus" title="添加成绩/评语"></a>
+                    						 <a th:href="@{/inserscore/}+${infos.sId}" class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-plus" title="添加成绩"></a>
+                  
+                    						 <a th:href="@{/issue/}+${infos.sNumber}" class="am-btn am-btn-default am-btn-xs am-text-success am-round am-icon-puzzle-piece" title="添加评语"></a>
                   
                    						 </div>
                   					</div>	

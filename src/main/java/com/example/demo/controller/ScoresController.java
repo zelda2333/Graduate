@@ -57,7 +57,7 @@ public class ScoresController {
 	 
 	 //显示当前学生信息，在页面回显
 	
-	@RequestMapping(value = "/issue/{sId}",method={RequestMethod.GET})
+	@RequestMapping(value = "/inserscore/{sId}",method={RequestMethod.GET})
 	 public String ListStuBysId(@PathVariable("sId") int sId, Model model){
 		 
 		 StudentInfo stuinfo = stuinfoDao.findByStuId(sId);
@@ -67,7 +67,7 @@ public class ScoresController {
 			
 		//去添加issue and score
 	    //return "redirect:/issue";
-	    return "issue";
+	    return "redirect:/scores";
 		//return model;
 	 }
 	 
@@ -79,7 +79,7 @@ public class ScoresController {
 		
 		model.addAttribute("msg", "添加成绩成功");
 		}
-		 return "issue";
+		 return "redirect:/scores";
 	    }
 	 
 	

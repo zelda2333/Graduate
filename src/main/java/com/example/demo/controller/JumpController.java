@@ -10,4 +10,8 @@ public class JumpController {
     public String toIssuePage(){
         return "issue";
     }  
+    @GetMapping(value = "/postuser")
+    public String toAddUserPage(){
+        return "postuser";
+    }
 }
