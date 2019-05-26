@@ -11,8 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.example.demo.entity.Classroom;
+import com.example.demo.entity.StudentInfoAndRepos;
+import com.example.demo.entity.TeacherAndClassroom;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserAndAuthor;
+import com.example.demo.entity.UserAndTeacherAndClassroom;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -62,11 +66,30 @@ public class UserDaoTest {
 	}
 	
 	@Test
-	
+	@Ignore
 	public void existsByUserName() {
 		
 		User effectedNum = userDao.findByUsername("123");
 		//assertEquals(1,effectedNum);
+	}
+	
+	
+	@Test
+	public void ListTeacherAndClass() {
+		List<UserAndTeacherAndClassroom> listTeacherAndClass = userDao.ListTeacherAndClass();
+		for(UserAndTeacherAndClassroom teacher:listTeacherAndClass){
+//			model.addAttribute("stusinfo",stuinfo);
+			System.out.println(teacher);
+			
+			List<Classroom> classroom = teacher.getTeacherandclassroom().getClassroom();
+			for(Classroom className:classroom){
+				System.out.println(className);
+			}
+			
+		}
+		
+		
+		System.out.println(listTeacherAndClass);
 	}
 	
 	

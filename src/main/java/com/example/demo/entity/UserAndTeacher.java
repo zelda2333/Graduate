@@ -1,8 +1,6 @@
 package com.example.demo.entity;
 
-
-
-public class User {
+public class UserAndTeacher {
 	//主键id
 	private Integer uId;
 	//用户名
@@ -10,27 +8,12 @@ public class User {
 	//密码
 	private String password;
 	private Integer authorId;
-	
-	private Authority authority;
-	private TeacherAndClassroom teacherandclassroom;
 	private Teacher teacher;
 	public Teacher getTeacher() {
 		return teacher;
 	}
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
-	}
-	public TeacherAndClassroom getTeacherandclassroom() {
-		return teacherandclassroom;
-	}
-	public void setTeacherandclassroom(TeacherAndClassroom teacherandclassroom) {
-		this.teacherandclassroom = teacherandclassroom;
-	}
-	public Authority getAuthority() {
-		return authority;
-	}
-	public void setAuthority(Authority authority) {
-		this.authority = authority;
 	}
 	public Integer getuId() {
 		return uId;
@@ -50,7 +33,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 	public Integer getAuthorId() {
 		return authorId;
 	}
@@ -59,9 +41,8 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [uId=" + uId + ", uName=" + uName + ", password=" + password + ", authorId=" + authorId
-				+ ", authority=" + authority + ", teacherandclassroom=" + teacherandclassroom + ", teacher=" + teacher
-				+ "]";
+		return "UserAndTeacher [uId=" + uId + ", uName=" + uName + ", password=" + password + ", authorId=" + authorId
+				+ ", teacher=" + teacher + "]";
 	}
 	
 }

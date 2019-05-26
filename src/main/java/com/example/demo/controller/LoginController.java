@@ -42,13 +42,21 @@ public class LoginController {
             return "index";
         }else if(!list.getPassword().equals(password)){
             //提醒用户输入的密码不正确
-            map.put("msg", "提醒用户输入的密码不正确");
+            map.put("msg", "您的用户名或密码错误，请重新输入");
             return "index";
         }else{
         	session.setAttribute("uname",uname);
         	System.out.println(authorId);
             session.setAttribute("author",authorId);
-            return "redirect:/stuinfo";
+            
+            if(authorId==3){
+            	//此用户是超级管理员
+            	return "redirect:/admindex";
+            }else{
+               	return "redirect:/infodaoru";
+            }
         }
+        
+        
     }
 }

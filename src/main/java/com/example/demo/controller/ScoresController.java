@@ -67,7 +67,7 @@ public class ScoresController {
 			
 		//去添加issue and score
 	    //return "redirect:/issue";
-	    return "redirect:/scores";
+	    return "inserscore";
 		//return model;
 	 }
 	 

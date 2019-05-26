@@ -30,7 +30,7 @@ public class IssueController {
 	//显示当前仓库信息，在页面回显
 	
 		@RequestMapping(value = "/issue/{repos}",method={RequestMethod.GET})
-		 public String ListStuBysId(@PathVariable("repos") String repos, Model model){
+		 public String ListReposBysId(@PathVariable("repos") String repos, Model model){
 			 		 
 			 model.addAttribute("reposName",repos);
 			 System.out.println("reposName: " + repos);
@@ -51,7 +51,7 @@ public class IssueController {
 							@RequestParam("title") String title,
 							GithubIssue issue,Model model){
 			
-		String uri="https://api.github.com/repos/"+loginer+"/"+rname+"/issues";
+		String uri="https://api.github.com/repos/cs154"+"/"+rname+"/issues";
 		System.out.println(uri);
 		String retitle=githubProvider.postIssue(issue, uri,"zelda2333", "964544758dzx1");
 		if(title==retitle){
@@ -64,7 +64,7 @@ public class IssueController {
 	
 	//查看某条成绩对应的issue
 	@RequestMapping(value = "/listoneissue/{repoName}/{issueNum}",method={RequestMethod.GET})
-	 public String toUpdateScoresPage(@PathVariable("repoName") String reposName, 
+	 public String getAnIssue(@PathVariable("repoName") String reposName, 
 			 						  @PathVariable("issueNum") int number, 
 			 						  Model model){
 		String uri="https://api.github.com/repos/gradupro/"+reposName+"/issues/"+number;

@@ -44,13 +44,11 @@
  		update user
  		<set>
  			<if test="uName!=null">u_name=#{uName}</if>
- 			<if test="password!=null">password=#{password}</if>
- 			
- 			
+ 			<if test="password!=null">password=#{password}</if>		
  		</set>
  		where u_id=#{uId}
  	</update>
- 	<delete id="deleteUser">
+ 	<delete id="deleteUser" parameterType="com.example.demo.entity.User">
  		DELETE FROM user WHERE u_id=#{uId}
  	</delete>
  	
@@ -62,5 +60,63 @@
  		SELECT count(*) From user WHERE u_name=#{uName};
  	</select>
  	
- 		
+ 	<select id="findByAuthorId" resultType="com.example.demo.entity.User">
+ 		SELECT * From user WHERE author_id=#{authorId};
+ 	</select>
+ 	
+ 	
+ 	
+    <resultMap id="classRoomResultMap" type="com.example.demo.entity.Classroom">
+        <id property="cId" column="c_id" />
+        <result property="cName" column="c_name" />  
+    </resultMap>
+    <resultMap id="teacherResultMap" type="com.example.demo.entity.TeacherAndClassroom">
+        <id property="tcId" column="tc_id" />
+        <result property="tId" column="t_id" />
+        <result property="cId" column="c_id" />  
+        <!-- 将classroom list属性映射到collection -->
+         <collection property="classroom" ofType="Classroom" resultMap="classRoomResultMap"/>      
+    </resultMap>
+    
+    <resultMap id="userResultMap" type="com.example.demo.entity.UserAndTeacherAndClassroom">
+        <id property="uId" column="user_id"  />
+        <result property="uName" column="u_name"  />
+        <result property="password" column="password"  />
+        <result property="authorId" column="author_id"  />
+        <association property="teacherandclassroom" javaType="TeacherAndClassroom" resultMap="teacherResultMap"/>  
+    </resultMap>
+    <!-- select语句 -->
+    <select id="ListTeacherAndClass" resultMap="userResultMap">
+       SELECT teacher.tc_id,teacher.c_id,`user`.u_name,classroom.c_name
+		 FROM teacher,user,classroom
+		 WHERE teacher.t_id=`user`.u_id AND teacher.c_id=classroom.c_id 
+		 ORDER BY teacher.t_id ASC
+    </select>
+ 	
+ 	 <select id="FindTeachClassBytcId" resultMap="userResultMap">
+       SELECT teacher.tc_id,teacher.c_id,teacher.t_id,`user`.u_name,classroom.c_name
+		 FROM teacher,user,classroom
+		 WHERE teacher.t_id=`user`.u_id AND teacher.c_id=classroom.c_id AND teacher.tc_id=#{tcId};
+    </select>
+ 	
+ 	
+ 	<resultMap id="teacherMap" type="Teacher">
+        <id property="tcId" column="tc_id" />
+        <result property="tId" column="t_id" />
+        <result property="cId" column="c_id" />       
+    </resultMap>
+    
+    <resultMap id="userTeacherMap" type="UserAndTeacher">
+        <id property="uId" column="user_id"  />
+        <result property="uName" column="u_name"  />
+        <result property="password" column="password"  />
+        <result property="authorId" column="author_id"  />
+        <association property="teacher" javaType="Teacher" resultMap="teacherMap"/>  
+    </resultMap>
+ 	
+ 	 <select id="ListTeacherName" resultMap="userTeacherMap">
+       SELECT teacher.tc_id,teacher.c_id,teacher.t_id,`user`.u_name
+		 FROM teacher,user
+		 WHERE teacher.t_id=`user`.u_id
+    </select>	
  </mapper>

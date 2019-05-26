@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dao.ReposDao;
 import com.example.demo.dao.StudentInfoDao;
@@ -18,6 +19,7 @@ import com.example.demo.dto.GithubMember;
 import com.example.demo.dto.GithubRepos;
 import com.example.demo.entity.Authority;
 import com.example.demo.entity.Repos;
+import com.example.demo.entity.StudentInfo;
 import com.example.demo.entity.StudentInfoAndRepos;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserAndAuthor;
@@ -69,6 +71,15 @@ public class StuInfoController {
 		//System.out.println( "hello " + githubProvider.getMembers("zelda2333", "964544758dzx1"));
 		return "redirect:/stuinfo";
 	}
+	//根据班级显示学生信息
+	@GetMapping("/classstuinfo")
+	public String getStuinfoByClassromm(@RequestParam("cId") int cId, Model model){
+		List<StudentInfo> stuByclassroom = stuinfoDao.ListStuByClassroom(cId);
+		model.addAttribute("stuinfo", stuByclassroom);
+		System.out.println(cId);
+		return "infodaoru";
+	}
+		
 	
 	
 	

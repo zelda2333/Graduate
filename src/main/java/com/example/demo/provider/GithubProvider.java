@@ -73,7 +73,7 @@ public class GithubProvider {
 	public List<GithubRepos> getRepos(){
 		OkHttpClient client = new OkHttpClient();
 		 Request request = new Request.Builder()
-			      .url("https://api.github.com/orgs/gradupro/repos")
+			      .url("https://api.github.com/orgs/cs154/repos")
 			      .build();
 
 			  try {

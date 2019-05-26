@@ -108,7 +108,7 @@ public class UserController {
     }	 
 	
 	
-	//显示当前用户，在页面回显
+	//显示当前管理员（助教），在页面回显
 	
 		@RequestMapping(value = "/upadmin/{uname}",method={RequestMethod.GET})
 			 public String ListAdminByuName(@PathVariable("uname") String uname, Model model){
@@ -121,7 +121,7 @@ public class UserController {
 		
 		@RequestMapping(value="/updateadmin",method={RequestMethod.PUT})
 	    public String updateAdmin(User user,Model model){
-		//根据u_id，修改密码
+		//根据u_id，修改密码管理员门（助教）
 		if( userDao.updateUser(user)==1){
 		
 		model.addAttribute("msg", "修改密码成功");

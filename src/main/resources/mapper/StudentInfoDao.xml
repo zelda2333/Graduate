@@ -23,9 +23,18 @@
 	<select id="findByStuId" resultType="com.example.demo.entity.StudentInfo">
 		SELECT * FROM studentinfo WHERE s_id=#{sId}
 	</select>
+	
+	<select id="ListStuByClassroom" resultType="com.example.demo.entity.StudentInfo">
+		SELECT studentinfo.s_id,studentinfo.s_name,studentinfo.s_number
+		 FROM studentinfo
+		 WHERE studentinfo.c_id = #{cId}
+	</select>
+	
+	
+	
 </mapper>
 
-
+ 	
 
 
 

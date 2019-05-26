@@ -1,5 +1,4 @@
 <!doctype html>
-<!doctype html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
@@ -38,10 +37,10 @@
   	     <div class="sideMenu">
       <h3 class="am-icon-flag"><em></em> <a href="/infodaoru">学生信息</a></h3>
       <ul>
-     	<li><a href="/infodaoru">信息导入</a></li>
+        <li><a href="/infodaoru">信息导入</a></li>
         <li><a href="/stuinfo">下载作业</a></li>
       </ul>
-      <h3 class="am-icon-cart-plus on"><em></em> <a href="/scores"> 学生成绩</a></h3>
+      <h3 class="am-icon-cart-plus"><em></em> <a href="/scores"> 学生成绩</a></h3>
       <ul>
         <li><a href="/scores">查看成绩</a></li>
         <li><a href="/addscores">添加成绩/评语</a></li>
@@ -51,11 +50,11 @@
       <ul>
       	<li><a th:href="@{/upuser/}+${session.uname}">修改密码</a></li>
       </ul>
-     <h3 class="am-icon-cog"><em></em> <a href="/gitmanage"> 系统设置</a></h3>
+      <h3 class="am-icon-cog on"><em></em> <a href="/gitmanage"> 系统设置</a></h3>
       <ul>
-      	  <li><a href="/gitmanage">查看班级仓库</a></li>
-          <li><a href="/postrepos">添加班级仓库</a></li>
-          <li><a href="/gitauth">Github授权</a></li>
+      	<li><a href="/gitmanage">查看班级仓库</a></li>
+        <li><a href="/postrepos">添加班级仓库</a></li>
+        <li><a href="/gitauth">Github授权</a></li>
       </ul>
     </div>
     <!-- sideMenu End --> 
@@ -81,8 +80,9 @@
 	<div class=" admin-content">	
 		<div class="daohang">
 			<ul>
-				<li><a href="/scores" type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 查看学生成绩</a> </li>				
-				<li><a href="/addscores" type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 添加成绩/评语</a> </li>				
+				<li><a href="/gitmanage" class="am-btn am-btn-default am-radius am-btn-xs"> 查看班级仓库</a> </li>	
+				<li><a href="/postrepos" class="am-btn am-btn-default am-radius am-btn-xs"> 添加班级仓库</a> </li>				
+				<li><a href="/gitauth" class="am-btn am-btn-default am-radius am-btn-xs">Github授权</a></li>
 			</ul>
 		</div>
 	
@@ -90,11 +90,11 @@
     	
     	<div class="admin-biaogelist">
 			<div class="listbiaoti am-cf">
-       			 <ul class="am-icon-flag on">
-          				学生成绩
+       			<ul class="am-icon-cog">
+          		系统设置
         		</ul>
-       			<dl class="am-icon-home" style="float: right;">当前位置：学生成绩 > <a href="#">添加成绩/评语</a> </dl>
-   			</div>
+        		<dl class="am-icon-home" style="float: right;">当前位置： 系统设置><a href="#">Github授权 </a></dl>
+			</div>
 	   
     		<div class="am-tabs am-margin" data-am-tabs>
     			<ul class="am-tabs-nav am-nav">
@@ -104,37 +104,45 @@
     										border-top: 1px solid #ddd;
     										border-right: 1px solid #ddd;
     										border-left: 1px solid #ddd;">
-    							查看评语</a></li>      
+    							Github授权</a></li>      
     			</ul>
 			    <div class="am-tabs-bd">
       			
 
       <div class="am-tab-panel am-fade" id="tab2">
-        <form class="am-form">
+      
+      <form class="am-form" action="/githubauth" method="post">
+      	<input type="hidden" name="tId" value="39"/>
         	<div class="am-g am-margin-top">
            		 <div class="am-u-sm-4 am-u-md-2 am-text-right">
-             		title:
+             		用户名：
            		 </div>
            		 <div class="am-u-sm-8 am-u-md-4">
-           		 	<span th:text="${issue.title==null}?此次成绩未添加评语:${issue.title}"></span>
+           		 	<input type="text" name="gUname"/>
+              
            		 </div>
             		<div class="am-hide-sm-only am-u-md-6"></div>
          		 </div>
           <div class="am-g am-margin-top">
             <div class="am-u-sm-4 am-u-md-2 am-text-right">
-             	body:
+             	密码：
             </div>
             <div class="am-u-sm-8 am-u-md-4">
-              <span th:text="${issue.body==null}?此次成绩未添加评语:${issue.body}"></span>
+              <input type="password"  name="gPassword" />
             </div>
             <div class="am-hide-sm-only am-u-md-6"></div>
           </div>
 
           
-          <p th:text="${mgs}"></p>
+         <div class="am-g am-margin-top">
+				<div class="am-u-sm-4 am-text-right">	
+					<p style="color: red" th:text="${msg1}"></p>
+				</div>
+				 <div class="col-sm-4 tips"></div>
+			</div>
           
 		<div class="am-margin" style="float:right;">
-   				 <a href="/scores" type="buttun" class="am-btn am-btn-success am-radius ">返回</a>
+   				 <button type="submit" class="am-btn am-btn-success am-radius ">提交</button>
     
   		</div>
         </form>

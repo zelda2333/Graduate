@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- namesapce:理解成实现类的全路径（包名.类名） -->
+ <mapper namespace="com.example.demo.dao.TeacherDao">
+	 
+ 	<insert id="insertTeachClass" useGeneratedKeys="true" keyProperty="tcId"
+		keyColumn="tc_id" parameterType="com.example.demo.entity.Teacher">
+		INSERT INTO
+		teacher(t_id,c_id)
+		VALUES
+		(#{tId},#{cId})
+	</insert>
+ 	
+ 	<delete id="deleteTeacher" parameterType="com.example.demo.entity.Teacher">
+ 		DELETE FROM teacher WHERE t_id=#{tId}
+ 	</delete>
+ 	
+ 	
+	<update id="addTeachClass" parameterType="com.example.demo.entity.Teacher">
+ 		update teacher
+ 		<set>
+ 			<if test="cId!=null">c_id=#{cId}</if>
+ 		</set>
+ 		where tc_id=#{tcId}
+ 	</update>
+ 	
+ 	<delete id="deleteTeachClass" parameterType="com.example.demo.entity.Teacher">
+ 		DELETE FROM teacher WHERE tc_id=#{tcId}
+ 	</delete>
+ 	
+ 		
+ </mapper>

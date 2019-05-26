@@ -27,16 +27,6 @@
 <header class="am-topbar admin-header">
   <div class="am-topbar-brand"><img src="assets/i/logo.png" th:src="@{/assets/i/logo.png}"></div>
 
-  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-    <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
- 		<li class="kuanjie">
- 	
- 			<a href="/stuinfo">学生信息</a>          
- 			<a href="/scores">学生成绩</a> 
- 			<a href="/usermanage">用户管理</a>   
- 		</li>
-    </ul>
-  </div>
 </header>
 
 <div class="am-cf admin-main"> 
@@ -46,8 +36,9 @@
 
    		 <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;" th:text="${session.uname}"> 用户名</div>
   	     <div class="sideMenu">
-      		<h3 class="am-icon-flag"><em></em> <a href="/stuinfo">学生信息</a></h3>
+      		<h3 class="am-icon-flag"><em></em> <a href="/infodaoru">学生信息</a></h3>
       		<ul>
+      			<li><a href="/infodaoru">信息导入</a></li>
        		 	<li><a href="/stuinfo">下载作业</a></li>
       		</ul>
       		<h3 class="am-icon-cart-plus"><em></em> <a href="/scores"> 学生成绩</a></h3>
@@ -59,10 +50,13 @@
      		<h3 class="am-icon-users on"><em></em> <a th:href="@{/upuser/}+${session.uname}">用户管理</a></h3>
       		<ul>
       			<li><a th:href="@{/upuser/}+${session.uname}">修改密码</a></li>
-        		<li><a href="/usermanage" th:style="'display:' + @{(${session.author==2} ? 'none' : 'unset')} + ''">查看管理员</a></li>
-        		<li><a href="/postuser" th:style="'display:' + @{(${session.author==2} ? 'none' : 'unset')} + ''">添加管理员</a></li>
-      		</ul>
-     
+        	</ul>
+     		<h3 class="am-icon-cog"><em></em> <a href="/gitmanage"> 系统设置</a></h3>
+     		<ul>
+      	  		<li><a href="/gitmanage">查看班级仓库</a></li>
+          		<li><a href="/postrepos">添加班级仓库</a></li>
+          		<li><a href="/gitauth">Github授权</a></li>
+     		</ul>
     </div>
     <!-- sideMenu End --> 
     

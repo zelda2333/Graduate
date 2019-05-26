@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.thymeleaf.util.StringUtils;
 
+import com.example.demo.dao.TeacherDao;
 import com.example.demo.dao.UserDao;
+import com.example.demo.entity.Teacher;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 //import com.mchange.lang.StringUtils;
@@ -46,6 +48,7 @@ public class RegisterController {
         }else{
             session.setAttribute("uname", user.getuName());
             session.setAttribute("users", user);
+         
             userService.addUser(user);
             model.addAttribute("msg1","注册成功");
             return model;

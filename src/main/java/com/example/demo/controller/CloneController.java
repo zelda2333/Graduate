@@ -25,9 +25,9 @@ public class CloneController {
 		String localPath = local + "\\" + path;
 		System.out.println(url);
 		System.out.println(localPath);
-		String cloneResult = gitUtil.cloneRepository("git@github.com:zelda2333/test.git", local);
+		String cloneResult = gitUtil.cloneRepository(url, localPath);
 		// 下载
-		model.addAttribute("test", "test");
+		model.addAttribute("test", "cs154");
 		model.addAttribute("msg", "正在下载，请稍等");
 		if(cloneResult=="success"){
 			model.addAttribute("msg", "下载完成");

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- namesapce:理解成实现类的全路径（包名.类名） -->
+ <mapper namespace="com.example.demo.dao.ClassroomDao">
+	 <!-- id:方法名  parameterType:定义参数类型  resultType:返回值类型-->
+	 <select id="classRoomList" resultType="com.example.demo.entity.Classroom">
+ 		SELECT * From classroom
+ 	</select>
+	 
+ 	<insert id="addClass" useGeneratedKeys="true" keyProperty="cId"
+		keyColumn="c_id" parameterType="com.example.demo.entity.Classroom">
+		INSERT IGNORE INTO
+		classroom(c_name)
+		VALUES
+		(#{cName})
+	</insert>
+ 	<update id="updateClass" parameterType="com.example.demo.entity.Classroom">
+ 		update classroom
+ 		<set>
+ 			<if test="cName!=null">c_name=#{cName}</if>
+ 			
+ 		</set>
+ 		where c_id=#{cId}
+ 	</update>
+ 	<delete id="deleteClass" parameterType="com.example.demo.entity.Classroom">
+ 		DELETE FROM classroom WHERE c_id=#{cId}
+ 	</delete>
+ 	
+ 	<select id="findByClassname" resultType="com.example.demo.entity.Classroom">
+		SELECT * FROM classroom WHERE c_name=#{cName}
+	</select>
+ 
+ 		
+
+	
+ 	
+ </mapper>

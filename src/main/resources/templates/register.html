@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
+   <head>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap Login Form Template</title>
+        <title>学生成绩管理系统</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -14,11 +14,6 @@
         <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/form-elements.css">
         <link rel="stylesheet" href="assets/css/style.css">
-		<link rel="icon" type="image/png" href="assets/i/favicon.png">
-		<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
-		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
-		<link rel="stylesheet" href="assets/css/amazeui.min.css"/>
-		<link rel="stylesheet" href="assets/css/admin.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +28,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-
+		<link rel="icon" type="image/png" href="assets/i/favicon.png" th:href="@{/assets/i/favicon.png}">
     </head>
 <script type="text/javascript">
 
@@ -54,8 +49,8 @@
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>Login to our site</h3>
-                            		<p>Enter your username and password to log on:</p>
+                        			<h3>Register to our site</h3>
+                            		<p>Enter your username, password and so on to register:</p>
                         		</div>
                         		<div class="form-top-right">
                         			<i class="fa fa-key"></i>
@@ -85,8 +80,8 @@
    								 background: #e8f0fe;
    								 border: 3px solid #ddd;">
 							<option value="1">老师</option>
-							<option value="2">管理员</option>
 							
+							<option value="3">管理员</option>
 						</select>
 						
 				    </div>
@@ -100,7 +95,8 @@
 			</div>                        
 			<div class="modal-footer" style="margin-top: 30px;">
 			 	<a th:href="@{/}" style="margin-right:10px;color: #888;font-size:13px;">去登陆</a>
-				<button class="btn-primary am-btn" type="submit" onclick="clik1()">确定</button>
+				<button class="btn-primary btn-lg" type="submit" onclick="clik1()" 
+					style="border: 0px;border-radius: 6px;">确定</button>
 				
 			</div>
 									</div>

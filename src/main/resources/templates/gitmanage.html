@@ -34,30 +34,31 @@
 <div class="nav-navicon admin-main admin-sidebar">
     
 
-    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;" th:text="${session.uname}"> 用户名</div>
-  
-   <div class="sideMenu">
+    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;" th:text="hello+' ' + ${session.uname}"> 用户名</div>
+    
+     <div class="sideMenu">
       		<h3 class="am-icon-flag"><em></em> <a href="/infodaoru">学生信息</a></h3>
       		<ul>
       			<li><a href="/infodaoru">信息导入</a></li>
        		 	<li><a href="/stuinfo">下载作业</a></li>
       		</ul>
-      		<h3 class="am-icon-cart-plus on"><em></em> <a href="/scores"> 学生成绩</a></h3>
+      		<h3 class="am-icon-cart-plus"><em></em> <a href="/scores"> 学生成绩</a></h3>
       		<ul>
       		  <li><a href="/scores">查看成绩</a></li>
         	  <li><a href="/addscores">添加成绩/评语</a></li>
         
       		</ul>
-     		<h3 class="am-icon-users"><em></em> <a th:href="@{/upuser/}+${session.uname}">用户管理</a></h3>
+      		<h3 class="am-icon-users"><em></em> <a th:href="@{/upuser/}+${session.uname}">用户管理</a></h3>
       		<ul>
       			<li><a th:href="@{/upuser/}+${session.uname}">修改密码</a></li>
         	</ul>
-     		<h3 class="am-icon-cog"><em></em> <a href="/gitmanage"> 系统设置</a></h3>
-     		<ul>
-      	  		<li><a href="/gitmanage">查看班级仓库</a></li>
-          		<li><a href="/postrepos">添加班级仓库</a></li>
-          		<li><a href="/gitauth">Github授权</a></li>
+        	<h3 class="am-icon-cog on"><em></em> <a href="/gitmanage"> 系统设置</a></h3>
+      		<ul>
+      		  <li><a href="/gitmanage">查看班级仓库</a></li>
+        	  <li><a href="/postrepos">添加班级仓库</a></li>
+        	  <li><a href="/gitauth">Github授权</a></li>
       		</ul>
+     
     </div>
     <!-- sideMenu End --> 
     
@@ -73,81 +74,59 @@
 				});
 		</script> 
    
-    
 </div>
+
 <div class=" admin-content">
 	
 		<div class="daohang">
 			<ul>
-				<li><a href="/scores" type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 查看学生成绩</a> </li>				
-				<li><a href="/addscores" type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 添加成绩/评语</a> </li>				
-		
+				<li><a href="/gitmanage" class="am-btn am-btn-default am-radius am-btn-xs"> 查看班级仓库</a> </li>	
+				<li><a href="/postrepos" class="am-btn am-btn-default am-radius am-btn-xs"> 添加班级仓库</a> </li>				
+				<li><a href="/gitauth"class="am-btn am-btn-default am-radius am-btn-xs">Github授权</a></li>
 			</ul>
 		</div>
 	
     <div class="admin-biaogelist">
       <div class="listbiaoti am-cf">
-        <ul class="am-icon-flag on">
-          	学生成绩
+        <ul class="am-icon-cog">
+          	系统设置
         </ul>
-        <dl class="am-icon-home" style="float: right;">当前位置： 学生成绩 </dl>
-
+        <dl class="am-icon-home" style="float: right;">当前位置： 系统设置><a href="#">查看班级仓库 </a></dl>
+		
       </div>
       <form class="am-form am-g">
+      
         <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
           <thead>
             <tr class="am-success">
               
               <th class="table-id am-text-center">ID</th>
-              <th class="">姓名</th>
-              <th class="">学号</th>
-              <th class="">成绩</th>
-              <th class="">第几次成绩</th>
-              <th width="130px" class="table-set">操作</th>
+              <th class="">老师</th>
+              <th class="">责任班级</th>
+              <th class="am-hide-sm-only">班级仓库名称</th>
+              
             </tr>
           </thead>
           <tbody>
-            <tr th:each="scores : ${scoresinfo}">
-              
-              <td class="am-text-center" th:text="${scores.sId}">14</td>
-              <td><a href="#" th:text="${scores.stuinfo.sName}">zelda</a></td>
-              <td th:text="${scores.stuinfo.sNumber}">5143</td>
-              <td th:text="${scores.score}">94</td>
-              <td th:text="${scores.number}">1</td>
-   			 <td>
-               	<div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                    
-                  		<a th:href="@{/listoneissue/{repoName}/{issueNum}(repoName=${scores.stuinfo.sNumber},issueNum=${scores.number})}" class="am-btn am-btn-default am-btn-xs am-text-success am-round" title="查看评论详情"><span class="am-icon-file" ></span></a>
-                  		<a th:href="@{/upscores/}+${scores.scoreId}" class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" title="修改成绩"><span class="am-icon-pencil-square-o"></span></a>
-                      	
-                    </div>
-                  </div>	
-                </td>
+            <tr>             
+              <td class="am-text-center">1</td>
+              <td><a href="#">王老师</a></td>
+              <td>计算机科学与技术153班</td>
+         	  <td>cs1503</td>
             </tr>
-            
-            
-
-          </tbody>
+            <!-- <tr>             
+              <td class="am-text-center">2</td>
+              <td><a href="#">王老师</a></td>
+              <td>计算机科学与技术154班</td>
+         	  <td>cs154</td>
+            </tr> -->
+           </tbody>
         </table>
-        <div>
-         <div class="am-btn-group" style="float:right;margin-bottom: 5px;">
-     		<a href="/toexcel" class="am-btn am-btn-success am-icon-file-excel-o" title="导出Excel表" style="
-  					padding: 6px;
-  					width: 110px;
-  					height: 37px;
-  					border-radius: 4px;">  					
-  			<span style="font-size: xx-small;">导出excel表</span>
-  			</a>
-     		
-        </div>
         
-        </div>
-       
+        
+        <hr />
       </form>
-	  
-       
-                    	
+
       <div class="foods">
         <ul> @zelda-2019 </ul>
         <dl>

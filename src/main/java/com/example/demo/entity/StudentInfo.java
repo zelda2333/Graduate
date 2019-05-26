@@ -9,6 +9,14 @@ public class StudentInfo {
 	private String sNumber;
 	
 	private Repos repos;
+	private Classroom classroom;
+	
+	public Classroom getClassroom() {
+		return classroom;
+	}
+	public void setClassroom(Classroom classroom) {
+		this.classroom = classroom;
+	}
 	public Repos getRepos() {
 		return repos;
 	}
@@ -35,7 +43,8 @@ public class StudentInfo {
 	}
 	@Override
 	public String toString() {
-		return "StudentInfo [sId=" + sId + ", sName=" + sName + ", sNumber=" + sNumber + ", repos=" + repos + "]";
+		return "StudentInfo [sId=" + sId + ", sName=" + sName + ", sNumber=" + sNumber + ", repos=" + repos
+				+ ", classroom=" + classroom + "]";
 	}
 	
 }
